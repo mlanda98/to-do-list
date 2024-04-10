@@ -30,16 +30,18 @@
 
   </div>
   <main>
-    <h2>Tasks</h2>
-    <div class="task-input-container">
-      <input type="text" class="title-input" id="title-input" placeholder="enter task title">
-      <input type="text" class="description-input" id="description-input" placeholder="enter task description">
-      <input type="text" class="due-date-input" id="due-date-input" placeholder="enter due date">
-      <input type="text" class="priority-input" id="priority-input" placeholder="enter task priority">
+    <div class="task-container">
+      <h2>Tasks</h2>
+      <div class="task-input-container">
+        <input type="text" class="title-input" id="title-input" placeholder="enter task title">
+        <input type="text" class="description-input" id="description-input" placeholder="enter task description">
+        <input type="text" class="due-date-input" id="due-date-input" placeholder="enter due date">
+        <input type="text" class="priority-input" id="priority-input" placeholder="enter task priority">
+        <input type="text" class="selected-project" id="selected-project" placeholder="enter project name">
+      </div>
+      <button class="task-button" id="task-button">Add Task</button>
+      <div class="task" id="tasks"></div>
     </div>
-    <button class="task-button" id="task-button">Add Task</button>
-    <div class="task"></div>
-    
   </main>
 
   <script src="./main.js"></script>
