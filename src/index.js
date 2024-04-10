@@ -1,1 +1,3 @@
-alert("hello");
+import initialLoad from './pageLoad';
+
+initialLoad();

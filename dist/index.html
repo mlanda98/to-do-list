@@ -14,22 +14,32 @@
     <div>
       <h2>Home</h2>
       <div class="home-container">
-        <button class="tasks-button">All Tasks</button>
-        <button class="today-button">Today</button>
-        <button class="days-button">Next 7 days</button>
-        <button class="important-button">Important</button>
+        <button class="tasks-button" id="tasks-button">All Tasks</button>
+        <button class="today-button" id="today-button">Today</button>
+        <button class="days-button" id="days-button">Next 7 days</button>
+        <button class="important-button" id="important-button">Important</button>
       </div>
     </div>
 
     <div class="projects-container">
       <h2>Projects</h2>
-      <button class="add-button">Add Project</button>
-      <div class="projects"></div>
+      <input type="text" class="project-name-input" id="project-name-input" placeholder="enter project name">
+      <button id="add-button" class="add-button">Add Project</button>
+      <div class="projects" id="projects"></div>
     </div>
 
   </div>
   <main>
+    <h2>Tasks</h2>
+    <div class="task-input-container">
+      <input type="text" class="title-input" id="title-input" placeholder="enter task title">
+      <input type="text" class="description-input" id="description-input" placeholder="enter task description">
+      <input type="text" class="due-date-input" id="due-date-input" placeholder="enter due date">
+      <input type="text" class="priority-input" id="priority-input" placeholder="enter task priority">
+    </div>
+    <button class="task-button" id="task-button">Add Task</button>
     <div class="task"></div>
+    
   </main>
 
   <script src="./main.js"></script>
