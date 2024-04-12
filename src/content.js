@@ -1,4 +1,4 @@
-import addTask from "./addTasks";
+import {deleteTask, deleteTasks} from "./deleteTasks.js";
 
 
 function addProject(projectName){
@@ -7,11 +7,17 @@ function addProject(projectName){
 
 }
 
+function addTask(title, description, dueDate, priority){
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+}
 const addProjects = () => {
   const projects = [];
   
-  const projectButton = document.getElementById("add-button");
-  projectButton.addEventListener("click", () => {
+  const addButton = document.getElementById("add-button");
+  addButton.addEventListener("click", () => {
     const projectName = document.getElementById("project-name-input").value;
     const project = new addProject(projectName);
     projects.push(project);
@@ -33,12 +39,29 @@ const addProjects = () => {
 
     const tasksContainer = document.getElementById("tasks");
     tasksContainer.innerHTML = "";
-    tasksForProject.forEach((task) => {
+    tasksForProject.forEach((task, index) => {
       const taskDiv = document.createElement("div");
       taskDiv.textContent = `Title: ${task.title}, Description: ${task.description}, Due Date: ${task.dueDate}, Priority: ${task.priority}`;
       tasksContainer.appendChild(taskDiv);
-    })
-  }
+
+     
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      deleteTask(selectedProject, index, displayTasks);
+    if (taskDiv.parentNode === tasksContainer){
+      tasksContainer.removeChild(taskDiv);
+    }
+  
+    });
+    taskDiv.appendChild(deleteButton);
+    });
+
+}
+        
+  
+
+    
 
   const taskButton = document.getElementById("task-button");
   taskButton.addEventListener("click", () => {
@@ -48,15 +71,12 @@ const addProjects = () => {
     const priority = document.getElementById("priority-input").value;
     const selectedProjectName = document.getElementById("selected-project").value;
 
-    console.log(selectedProjectName);
-    console.log(projects);
-
     const selectedProject = projects.find(project => project.projectName === selectedProjectName)
 
-    console.log(selectedProject);
+  
 
     if (selectedProject){
-    const task = new addTask(title, description, dueDate, priority, selectedProject);
+    const task = new addTask(title, description, dueDate, priority);
     selectedProject.tasks.push(task);
     console.log(task);
     } else {
@@ -85,7 +105,6 @@ const addProjects = () => {
 
   const newProject = new addProject("New Project");
   projects.push(newProject);
-
   console.log(projects);
 }
 export default addProjects;
