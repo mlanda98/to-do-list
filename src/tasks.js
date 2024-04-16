@@ -16,7 +16,7 @@ taskModule.prototype.addTask = function(title, description, dueDate, priority, p
 }
 
 taskModule.prototype.deleteTask = function(taskId){
-  this.task = this.tasks.filter(task => task.id !== taskId);
+  this.tasks = this.tasks.filter(task => task.id !== taskId);
   this.renderTasks();
 
 }
@@ -47,5 +47,6 @@ taskModule.prototype.generatedId = function(){
 }
 
 const taskInstance = new taskModule();
+
 
 export default taskInstance;
