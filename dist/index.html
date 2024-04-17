@@ -22,19 +22,18 @@
     </div>
 
   
-    <div id="projects" class="projects-container">
+    <div id="projects-container">
       <h2>Projects</h2>
-      <form>
-        <label for="project-input">Project:</label>
-        <input type="text" id="title-input" name="title" placeholder="project-name">
-
-        <button type="submit">Add Project</button>
-      </form>
+        <form id="projects-form">
+          <label for="project-name-input">Project:</label>
+          <input type="text" id="project-name-input" name="title" placeholder="project-name">
+          <button id="add-project-button" type="submit">Add Project</button>
+        </form>
+      <div id="projects"></div>
     </div>
 
   </div>
   <main>
-    <div class="task-container">
     <div id="task-container" class="task-container">
       <h2>Tasks</h2>
       <div class="task-input-container">
@@ -62,7 +61,6 @@
           
         </form>
       </div>
-      <button class="task-button" id="task-button">Add Task</button>
       <div class="task" id="tasks"></div>
     </div>
   </main>

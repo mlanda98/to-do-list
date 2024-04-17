@@ -1,25 +1,25 @@
-function projectModule(){
+function ProjectModule(){
   this.projects = [];
 
 }
 
-projectModule.prototype.addProject = function(project){
+ProjectModule.prototype.addProject = function(project){
   this.projects.push(project);
   this.renderProjects();
 };
 
 
-projectModule.prototype.renderProjects = function(){
+ProjectModule.prototype.renderProjects = function(){
   const projectsContainer = document.getElementById("projects");
   projectsContainer.innerHTML = "";
 
   this.projects.forEach(project => {
-    const projectElement = document.createElement("div");
+    const projectElement = document.createElement("button");
     projectElement.textContent = project;
     projectsContainer.appendChild(projectElement);
   });
 };
 
-const projectInstance = new projectModule();
 
-export default projectInstance;
+
+export default ProjectModule;
