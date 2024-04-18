@@ -16,16 +16,40 @@ document.addEventListener("taskSelected", function(event){
 
 document.addEventListener("DOMContentLoaded", function(){
   const projectInstance = new ProjectModule();
+ 
+  function renderTasksForProject(projectName){
+    taskInstance.renderTasks(projectName);
+  }
+  projectInstance.projects.forEach(project => {
+    renderTasksForProject(project.name);
+  })
+
+  document.addEventListener("click", function(event){
+    if (event.target.classList.contains("project-button")){
+      const projectId = event.target.id;
+      const project = projectInstance.projects.find(p => p.id === projectId);
+      taskInstance.renderTasks(project.name);
+    }
+      
+  });
+
   function handleFormSubmit(event){
     event.preventDefault();
     const projectNameInput = document.getElementById("project-name-input");
-    const projectName = projectNameInput.value;
+    const projectName = projectNameInput.value.trim();
     projectInstance.addProject(projectName);
+    renderTasksForProject(projectName);
     projectNameInput.value = "";
+
+    
   }
 
   const projectForm = document.getElementById("projects-form");
   projectForm.addEventListener("submit", handleFormSubmit);
 
-  projectInstance.addProject("Project A");
+
+
+  const defaultProjectName = "Project A";
+  projectInstance.addProject(defaultProjectName);
+  renderTasksForProject(defaultProjectName);
 })

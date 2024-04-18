@@ -1,3 +1,5 @@
+import ProjectModule from "./projects";
+
 function taskModule(){
   this.tasks = [];
 }
@@ -11,8 +13,9 @@ taskModule.prototype.addTask = function(title, description, dueDate, priority, p
     priority, 
     project
   }
+  
   this.tasks.push(task);
-  this.renderTasks();
+  this.renderTasks(project);
 }
 
 taskModule.prototype.deleteTask = function(taskId){
@@ -21,21 +24,23 @@ taskModule.prototype.deleteTask = function(taskId){
 
 }
 
-taskModule.prototype.renderTasks = function(){
+taskModule.prototype.renderTasks = function(projectName){
   const taskContainer = document.getElementById("tasks");
   taskContainer.innerHTML = "";
 
   this.tasks.forEach(task => {
-    const taskElement = document.createElement("div");
-    taskElement.classList.add("task-item");
-    taskElement.innerHTML = `
-    <h3>${task.title}</h3>
-    <p>Description: ${task.description}</p>
-    <p>Due Date: ${task.dueDate}</p>
-    <p>Priority: ${task.priority}</p>
-    <p>Project: ${task.project}</p>
-    <button class="delete-button" data-task-id="${task.id}">Delete</button>`;
-    taskContainer.appendChild(taskElement);
+    if (task.project === projectName){
+      const taskElement = document.createElement("div");
+      taskElement.classList.add("task-item");
+      taskElement.innerHTML = `
+      <h3>${task.title}</h3>
+      <p>Description: ${task.description}</p>
+      <p>Due Date: ${task.dueDate}</p>
+      <p>Priority: ${task.priority}</p>
+      <p>Project: ${task.project}</p>
+      <button class="delete-button" data-task-id="${task.id}">Delete</button>`;
+      taskContainer.appendChild(taskElement);
+      }
   })
 }
 
