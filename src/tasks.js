@@ -13,7 +13,7 @@ taskModule.prototype.addTask = function(title, description, dueDate, priority, p
     priority, 
     project
   }
-  
+
   this.tasks.push(task);
   this.renderTasks(project);
 }
@@ -32,6 +32,17 @@ taskModule.prototype.renderTasks = function(projectName){
     if (task.project === projectName){
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-item");
+
+      let priorityClass = "";
+      if (task.priority === "Low"){
+        priorityClass = "priority-low"
+      } else if (task.priority === "Medium"){
+        priorityClass = "priority-medium"
+      } else {
+        priorityClass = "priority-high"
+      }
+
+      taskElement.classList.add(priorityClass);
       taskElement.innerHTML = `
       <h3>${task.title}</h3>
       <p>Description: ${task.description}</p>
