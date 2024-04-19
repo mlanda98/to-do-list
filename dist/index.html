@@ -60,6 +60,32 @@
           <button type="submit">Add Task</button>
           
         </form>
+        <div id="editTaskModal" class="modal" >
+          <div class="modal-content">
+            <span class="close">&times</span>
+            <label for="edit-title-input">Title:</label>
+            <input type="text" id="edit-title-input" name="title" placeholder="Enter task title" required>
+
+            <label for="edit-description-input">Description:</label>
+            <input type="text" id="edit-description-input" name="description" placeholder="Enter task description">
+
+            <label for="edit-due-date-input">Due Date:</label>
+            <input type="date" id="edit-due-date-input" name="dueDate" placeholder="Enter task dueDate">
+
+            <label for="edit-priority-input">Priority:</label>
+            <select id="edit-priority-input" name="priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          
+            <label for="edit-selected-project">Project:</label>
+            <input type="text" id="edit-selected-project" name="project" placeholder="enter project name">
+
+            <button id="save-task-button">Save</button>
+            <button id="cancel-task-button">Cancel</button>
+          </div>
+        </div>
       </div>
       <div class="task" id="tasks"></div>
     </div>

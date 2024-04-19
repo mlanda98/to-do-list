@@ -49,6 +49,7 @@ taskModule.prototype.renderTasks = function(projectName){
       <p>Due Date: ${task.dueDate}</p>
       <p>Priority: ${task.priority}</p>
       <p>Project: ${task.project}</p>
+      <button class="edit-button" data-task-id="${task.id}">Edit</button>
       <button class="delete-button" data-task-id="${task.id}">Delete</button>`;
       taskContainer.appendChild(taskElement);
       }
