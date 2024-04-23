@@ -1,9 +1,8 @@
 import ProjectModule from "./projects";
 import UIModule from "./ui";
-import taskInstance from "./tasks"
+import taskInstance, {saveTasksToLocalStorage, loadTasksFromLocalStorage} from "./tasks";
 
 taskInstance.addTask("Task 1", "Description of task 1", "2024-04-15","High", "Project A");
-
 const taskForm = document.getElementById("task-form");
 taskForm.dispatchEvent(new Event("submit"));
 
@@ -12,11 +11,20 @@ taskForm.dispatchEvent(new Event("submit"));
 document.addEventListener("taskSelected", function(event){
   const taskId = event.detail;
   taskInstance.deleteTask(taskId);
+  saveTasksToLocalStorage();
 })
 
 document.addEventListener("DOMContentLoaded", function(){
   const projectInstance = new ProjectModule();
  
+  projectInstance.loadProjectsFromLocalStorage();
+
+  if (projectInstance.projects.length === 0){
+    const defaultProjectName = "Project A";
+    projectInstance.addProject(defaultProjectName);
+    taskInstance.renderTasks(defaultProjectName);
+  }
+
   function renderTasksForProject(projectName){
     taskInstance.renderTasks(projectName);
   }
@@ -52,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const defaultProjectName = "Project A";
   projectInstance.addProject(defaultProjectName);
   renderTasksForProject(defaultProjectName);
+  saveTasksToLocalStorage();
 })
 
 let currentTaskId;
@@ -95,7 +104,7 @@ function cancelModal(){
   modal.style.display = "none";
 }
 
-document.getElementById("save-task-button").addEventListener("click", function(event){
+document.getElementById("save-task-button").addEventListener("click", function(){
   const modal = document.getElementById("editTaskModal");
   modal.style.display = "none";
 
@@ -116,12 +125,17 @@ document.getElementById("save-task-button").addEventListener("click", function(e
   }
 
   
-  
+  saveTasksToLocalStorage();
+  loadTasksFromLocalStorage();
   taskInstance.renderTasks(updatedProject);
 })
-      
 
+document.addEventListener("projectAdded", function(event){
+  const newProjectName = event.detail;
+  const projectInstance = new ProjectModule();
+  projectInstance.addProject(newProjectName);
+  saveProjectsToLocalStorage();
+  taskInstance.renderTasks(newProjectName);
   
+})
 
-
- 

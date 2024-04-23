@@ -1,7 +1,22 @@
 import ProjectModule from "./projects";
 
+function saveTasksToLocalStorage(){
+  try {
+  localStorage.setItem("tasks", JSON.stringify(taskInstance.tasks));
+  } catch (error){
+    console.error("error saving tasks to localStorage:", error)
+  }
+}
+export function loadTasksFromLocalStorage(){
+  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+  if (storedTasks){
+    taskInstance.tasks = storedTasks;
+  }
+  saveTasksToLocalStorage();
+};
+
 function taskModule(){
-  this.tasks = [];
+  this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 }
 
 taskModule.prototype.addTask = function(title, description, dueDate, priority, project){
@@ -16,11 +31,13 @@ taskModule.prototype.addTask = function(title, description, dueDate, priority, p
 
   this.tasks.push(task);
   this.renderTasks(project);
+  saveTasksToLocalStorage();
 }
 
 taskModule.prototype.deleteTask = function(taskId){
   this.tasks = this.tasks.filter(task => task.id !== taskId);
   this.renderTasks();
+  saveTasksToLocalStorage();
 
 }
 
@@ -66,4 +83,7 @@ taskModule.prototype.generatedId = function(){
 const taskInstance = new taskModule();
 
 
+  
+ 
 export default taskInstance;
+export {saveTasksToLocalStorage} ;

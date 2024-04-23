@@ -1,4 +1,5 @@
-import taskInstance from "./tasks";
+import taskInstance, {saveTasksToLocalStorage, loadTasksFromLocalStorage} from "./tasks";
+
 
 const UIModule = (function(){
   const taskForm = document.getElementById("task-form");
@@ -14,6 +15,7 @@ const UIModule = (function(){
 
 
     taskInstance.addTask(title, description, dueDate, priority, project);
+    saveTasksToLocalStorage();
     clearInputs();
   };
 
@@ -27,7 +29,8 @@ const UIModule = (function(){
 
   document.addEventListener("DOMContentLoaded", function () {
     taskForm.addEventListener("submit", submit);
-  });
+    loadTasksFromLocalStorage();
+  });;
 
   const taskContainer = document.getElementById("tasks");
   taskContainer.addEventListener("click", function(event){

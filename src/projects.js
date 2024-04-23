@@ -1,11 +1,32 @@
 function ProjectModule(){
-  this.projects = [];
+  this.projects = [] = JSON.parse(localStorage.getItem("projects")) || [];
   this.nextProjectId = 1;
 }
+
+ProjectModule.prototype.saveProjectsToLocalStorage = function(){
+  try{
+    localStorage.setItem("projects", JSON.stringify(this.projects));
+  } catch (error){
+    console.error("error saving projects to local storage:", error);
+  }
+};
+
+ProjectModule.prototype.loadProjectsFromLocalStorage = function(){
+  try {
+    const storedProjects = JSON.parse(localStorage.getItem("projects"));
+    if (storedProjects){
+      this.projects = storedProjects;
+      this.renderProjects();
+    }
+  } catch (error){
+    console.error("error loading projects from local storage:", error);
+  }
+};
 
 ProjectModule.prototype.addProject = function(projectName){
   const projectId = "project-" + this.nextProjectId++;
   this.projects.push({id: projectId, name: projectName});
+  this.saveProjectsToLocalStorage();
   this.renderProjects();
 };
 
@@ -25,4 +46,4 @@ ProjectModule.prototype.renderProjects = function(){
 
 
 
-export default ProjectModule;
+export default  ProjectModule ;
