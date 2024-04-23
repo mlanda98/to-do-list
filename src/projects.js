@@ -36,11 +36,21 @@ ProjectModule.prototype.renderProjects = function(){
   projectsContainer.innerHTML = "";
 
   this.projects.forEach(project => {
+    const projectsDiv = document.createElement("div");
+    projectsDiv.classList.add("project-item");
     const projectElement = document.createElement("button");
     projectElement.classList.add("project-button");
     projectElement.id = project.id;
     projectElement.textContent = project.name;
-    projectsContainer.appendChild(projectElement);
+    
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-project-button");
+    deleteButton.textContent = "Delete";
+    deleteButton.dataset.projectId = project.id;
+
+    projectsDiv.appendChild(projectElement);
+    projectsDiv.appendChild(deleteButton);
+    projectsContainer.appendChild(projectsDiv);
   });
 };
 

@@ -2,6 +2,8 @@ import ProjectModule from "./projects";
 import UIModule from "./ui";
 import taskInstance, {saveTasksToLocalStorage, loadTasksFromLocalStorage} from "./tasks";
 
+let projectInstance;
+
 taskInstance.addTask("Task 1", "Description of task 1", "2024-04-15","High", "Project A");
 const taskForm = document.getElementById("task-form");
 taskForm.dispatchEvent(new Event("submit"));
@@ -61,6 +63,21 @@ document.addEventListener("DOMContentLoaded", function(){
   projectInstance.addProject(defaultProjectName);
   renderTasksForProject(defaultProjectName);
   saveTasksToLocalStorage();
+
+  document.addEventListener("click", function(event){
+    if (event.target.classList.contains("delete-project-button")){
+      const projectId = event.target.dataset.projectId;
+      const projectIndex = projectInstance.projects.findIndex(project => project.id === projectId);
+      if (projectIndex !== -1){
+        taskInstance.tasks = taskInstance.tasks.filter(task => task.project !== projectInstance.projects[projectIndex].name);
+        projectInstance.projects.splice(projectIndex, 1);
+        projectInstance.saveProjectsToLocalStorage();
+        saveTasksToLocalStorage();
+        projectInstance.renderProjects();
+        taskInstance.renderTasks("Project A");
+      }
+    }
+  })
 })
 
 let currentTaskId;
