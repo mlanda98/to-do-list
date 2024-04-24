@@ -12,7 +12,6 @@ export function loadTasksFromLocalStorage(){
   if (storedTasks){
     taskInstance.tasks = storedTasks;
   }
-  saveTasksToLocalStorage();
 };
 
 function taskModule(){

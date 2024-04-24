@@ -11,25 +11,14 @@
     <h1>To-Do List</h1>
   </header>
   <div class="side-bar">
-    <div>
-      <h2>Home</h2>
-      <div class="home-container">
-        <button class="tasks-button" id="tasks-button">All Tasks</button>
-        <button class="today-button" id="today-button">Today</button>
-        <button class="days-button" id="days-button">Next 7 days</button>
-        <button class="important-button" id="important-button">Important</button>
-      </div>
-    </div>
-
-  
     <div id="projects-container">
       <h2>Projects</h2>
-        <form id="projects-form">
-          <label for="project-name-input">Project:</label>
-          <input type="text" id="project-name-input" name="title" placeholder=" enter project name">
+        <form id="projects-form" class="projects-form">
+          <label for="project-name-input"></label>
+          <input type="text" id="project-name-input" name="title" placeholder="Project Name">
           <button id="add-project-button" type="submit">Add Project</button>
         </form>
-      <div id="projects"></div>
+      <div id="projects" class="projects"></div>
     </div>
 
   </div>

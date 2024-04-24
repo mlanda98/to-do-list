@@ -1,11 +1,12 @@
 function ProjectModule(){
   this.projects = [] = JSON.parse(localStorage.getItem("projects")) || [];
-  this.nextProjectId = 1;
+  this.nextProjectId = parseInt(localStorage.getItem("nextProjectId")) || 1;
 }
 
 ProjectModule.prototype.saveProjectsToLocalStorage = function(){
   try{
     localStorage.setItem("projects", JSON.stringify(this.projects));
+    localStorage.setItem("nextProjectId", this.nextProjectId.toString());
   } catch (error){
     console.error("error saving projects to local storage:", error);
   }
